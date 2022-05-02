@@ -1,21 +1,20 @@
 import React from "react";
+import ButtonVariant from "./ButtonConfig";
 
 export interface ButtonProps {
   label: string
-  variant: 'primary' | 'secondary' | 'outlined'
-  class?: string
+  variant: "primary" | "secondary" | "outlined"
+  size?: "small" | "medium" | "large"
+  radius?: "rounded" | "roundedSmall" | "roundedMedium" | "roundedLarge"
+  sx?: object
 }
-
-
-
 
 // main component
 const Button = (props: ButtonProps) => {
-  let _getVarient = props.variant === 'primary' ? 'bg-blue-500' :
-    'secondary' ? 'bg-green-500' :
-      'outlined' ? 'border-2 border-black ' : 'bg-red-200'
-  return <button className={`px-4 py-2 text-white rounded-md ${_getVarient} ${props.class}`}>{props.label}</button>;
+  let general = ButtonVariant[props.variant || 'primary']
+  let size = ButtonVariant[props.size || "medium"]
+  let radius = ButtonVariant[props.radius || 'roundedMedium']
+  return <button className={`${general.class} ${size} ${radius}`} style={props.sx && props.sx}>{props.label}</button>;
 };
 
 export default Button;
-
