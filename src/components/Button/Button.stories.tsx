@@ -1,13 +1,20 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
+import Button, { ButtonProps } from './Button';
 
-import Button from './Button';
-
-export const Primary: ComponentStory<typeof Button> = () => (
-    <Button label='Hello world' />
-);
+export const ButtonComponnent = (args: JSX.IntrinsicAttributes & ButtonProps) => <Button {...args} />
 
 export default {
     title: 'Button',
-    component: Button,
+    component: ButtonComponnent,
+    argTypes: {
+        label: {
+            defaultValue: 'Hello World'
+        },
+        variant: {
+            options: ['primary', 'secondary', 'outlined']
+        }
+    }
 } as ComponentMeta<typeof Button>;
+
+
