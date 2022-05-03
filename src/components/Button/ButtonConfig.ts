@@ -1,16 +1,25 @@
+/** 
+* BUTTON VARIANT USING TAILWINDCSS THEME
+* YOU CAN UPDATE THE THEME IN TAILWIND CONFIG
+*/
 
 const ButtonVariant = {
+
+  // primary variant
   primary: {
     class: 'bg-primary  text-white hover:bg-opacity-80 cursor-pointer',
   },
 
+  // secondary variant
   secondary: {
     class: 'bg-secondary text-white hover:bg-opacity-80 cursor-pointer',
   },
 
+  // outlined variant
   outlined: {
     class: 'bg-transparent border shadow-sm cursor-pointer',
   },
+
   // Sizes
   small: 'px-2 py-1 text-sm',
   medium: 'px-4 py-2 text-md',
@@ -21,34 +30,7 @@ const ButtonVariant = {
   roundedSmall: 'rounded-sm',
   roundedMedium: 'rounded-md',
   roundedLarge: 'rounded-lg',
-
 };
 
 export default ButtonVariant;
-
-
-
-
-
-  // primary: {
-  //   bgColor: 'bg-primary-500',
-  //   color: 'text-white',
-  //   outline:
-  //     'border-primary-500 text-primary-500 bg-opacity-0 hover:bg-opacity-10',
-  // },
-  // secondary: {
-  //   bgColor: 'bg-secondary-500',
-  //   color: 'text-white',
-  //   outline:
-  //     'border-secondary-500 text-secondary-500 bg-opacity-0 hover:bg-opacity-10',
-  // },
-
-  // small: 'px-3 py-2',
-  // medium: 'px-4 py-2',
-  // large: 'px-5 py-2',
-
-  // rounded: 'rounded-full',
-  // roundedSmall: 'rounded-sm',
-  // roundedMedium: 'rounded-md',
-  // roundedLarge: 'rounded-lg',
 

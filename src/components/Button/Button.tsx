@@ -1,7 +1,11 @@
-import React from "react";
+import React, { FC, ButtonHTMLAttributes } from 'react'
 import ButtonVariant from "./ButtonConfig";
 
-export interface ButtonProps {
+/** 
+* BUTTON TYPES
+*/
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string
   variant: "primary" | "secondary" | "outlined"
   size?: "small" | "medium" | "large"
@@ -9,12 +13,15 @@ export interface ButtonProps {
   sx?: object
 }
 
-// main component
-const Button = (props: ButtonProps) => {
-  let general = ButtonVariant[props.variant || 'primary']
-  let size = ButtonVariant[props.size || "medium"]
-  let radius = ButtonVariant[props.radius || 'roundedMedium']
-  return <button className={`${general.class} ${size} ${radius}`} style={props.sx && props.sx}>{props.label}</button>;
+/** 
+* BUTTON COMPONENT
+*/
+
+const Button: FC<ButtonProps> = ({ variant, size, radius, sx, label, ...args }) => {
+  let general = ButtonVariant[variant || 'primary']
+  let inputSize = ButtonVariant[size || "medium"]
+  let inputRadius = ButtonVariant[radius || 'roundedMedium']
+  return <button className={`${general.class} ${inputSize} ${inputRadius}`} style={sx && sx} {...args}>{label}</button>;
 };
 
 export default Button;

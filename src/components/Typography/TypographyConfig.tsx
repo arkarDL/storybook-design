@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-// tailwindcss class for a link
+
+/** 
+* TYPOGRAPHY VARIANT FOR DESIGN SYSTEM USING TAILWINDCSS PROPS
+* ROLE
+* SIZE
+* FONT WEIGHT
+*/
 export const TypographyVariant = {
-
     h1: 'text-3xl leading-relaxed font-bold',
     h2: 'text-xl leading-relaxed font-bold',
     h3: 'text-lg leading-relaxed font-bold',
@@ -22,10 +27,11 @@ export const TypographyVariant = {
     normal: 'font-normal',
     semibold: 'font-semibold',
     bold: 'font-bold',
-
-
 };
 
+/** 
+* TYPE FOR  TYPOGRAPHY
+*/
 
 
 export interface TypographyProps {
@@ -36,26 +42,29 @@ export interface TypographyProps {
     sx?: object;
 }
 
+/** 
+* DECORATOR FUNCTION FOR TYPOGRAPHY COMPONENT
+* FUTHER TO ADD ARIA ROLES AND ACCESSIBILITY RULES
+*/
+const TypographyContainer: FC<TypographyProps> = ({ role, size, fontWeight, sx, children, ...args }): JSX.Element => {
 
-const TypographyContainer = (props: TypographyProps): JSX.Element => {
+    const typographyRole = TypographyVariant[role || 'p'];
+    const typographyWeight = TypographyVariant[fontWeight || 'normal'];
+    const typographySize = TypographyVariant[size || 'medium'];
 
-    const role = TypographyVariant[props.role || 'p'];
-    const fontWeight = TypographyVariant[props.fontWeight || 'normal'];
-    const size = TypographyVariant[props.size || 'medium'];
-
-    switch (props.role) {
+    switch (role) {
         case "h1":
-            return <h1 className={`${role} ${fontWeight} ${size} `} style={props.sx && props.sx} >{props.children}</h1>;
+            return <h1 className={`${typographyRole} ${typographyWeight} ${typographySize} `} style={sx && sx} {...args} >{children}</h1>;
         case "h2":
-            return <h2 className={`${role} ${fontWeight} ${size} `} style={props.sx && props.sx}>{props.children}</h2>;
+            return <h2 className={`${typographyRole} ${typographyWeight} ${typographySize} `} style={sx && sx} {...args}>{children}</h2>;
         case "h3":
-            return <h3 className={`${role} ${fontWeight} ${size} `} style={props.sx && props.sx}>{props.children}</h3>;
+            return <h3 className={`${typographyRole} ${typographyWeight} ${typographySize} `} style={sx && sx} {...args}>{children}</h3>;
         case "p":
-            return <p className={`${role} ${fontWeight} ${size} `} style={props.sx && props.sx}> {props.children}</p>;
+            return <p className={`${typographyRole} ${typographyWeight} ${typographySize} `} style={sx && sx} {...args}> {children}</p>;
         case "a":
-            return <a className={`${role} ${fontWeight} ${size} `} style={props.sx && props.sx}>{props.children}</a>;
+            return <a className={`${typographyRole} ${typographyWeight} ${typographySize} `} style={sx && sx} {...args}>{children}</a>;
         default:
-            return <p className={`${role} ${fontWeight} ${size} `} style={props.sx && props.sx}>{props.children}</p>;
+            return <p className={`${typographyRole} ${typographyWeight} ${typographySize} `} style={sx && sx} {...args}>{children}</p>;
     }
 
 }
@@ -64,3 +73,24 @@ const TypographyContainer = (props: TypographyProps): JSX.Element => {
 
 
 export default TypographyContainer;
+
+
+
+/**
+* TYPES FOR TYPOGRAPHY
+*/
+// export interface HeadingPROPS extends HTMLAttributes<HTMLHeadingElement> {
+//     children: string,
+//     role?: "h1" | "h2" | "h3" | "p" | "a",
+//     fontWeight?: "lighter" | "normal" | "semibold" | "bold",
+//     size?: "small" | "medium" | "large" | "xl" | "2xl" | "3xl" | "4xl" | "5xl",
+//     sx?: object;
+// }
+
+// export interface LinkProps extends LinkHTMLAttributes<HTMLLinkElement> {
+//     children: string,
+//     role?: "h1" | "h2" | "h3" | "p" | "a",
+//     fontWeight?: "lighter" | "normal" | "semibold" | "bold",
+//     size?: "small" | "medium" | "large" | "xl" | "2xl" | "3xl" | "4xl" | "5xl",
+//     sx?: object;
+// }

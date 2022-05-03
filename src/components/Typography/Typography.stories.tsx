@@ -7,7 +7,6 @@ export default {
     title: 'Components/Typography',
     component: Typography,
     argTypes: {
-
         role: {
             options: ['h1', 'h2', 'h3', 'p', 'a'],
             defaultValue: 'p'
@@ -17,7 +16,7 @@ export default {
             defaultValue: 'normal'
         },
         children: {
-            defaultValue: 'Hello World IS cool',
+            defaultValue: 'Hello World',
             control: 'text'
         },
         size: {
