@@ -15,7 +15,7 @@ A repo for building reuseable  components with React, TailwindCSS and Storybook.
 
 **Production :** Rollup
 
-**Test :** React Testing Library
+
 
 ## Run Locally
 
@@ -51,13 +51,6 @@ After running the command turbo will start
 
 There you can start your development workflow in a hot way.
 
-## Running Tests
-
-To run tests, run the following command in the root folder
-
-```bash
-  yarn test
-```
 
 ## Building 
 
