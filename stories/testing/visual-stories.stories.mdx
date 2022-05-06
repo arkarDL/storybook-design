@@ -1,0 +1,53 @@
+import { Meta, } from '@storybook/addon-docs';
+import Demo1 from '../assets/images/chromatic-build-demo.png'
+
+<Meta title="Documentation/Testing/Visual" />
+
+## Visual Testing on Stories
+
+Eventhough storybook supports many [tools](https://github.com/mojoaxel/awesome-regression-testing) for visual testing but it is recommand to use  [Chromatic](https://www.chromatic.com/) by maintainers to run visual tests.
+
+> before you continues it is recommand to make a github repository for your storybook project. 
+> And login in [here](https://www.chromatic.com/) with your github account and import your repository.
+
+```bash
+# With npm
+npm install chromatic --save-dev
+
+# With yarn
+yarn add --dev chromatic
+
+```
+Run this to integrate with your project.
+
+```bash
+#  replace `your-project-token` with the one provided by Chromatic.
+npx chromatic --project-token <your-project-token>
+```
+
+> If you are building your project with various toolings your build script can be vary .
+> But you can specify with a flag in [Chromatic cli](https://www.chromatic.com/docs/cli).
+
+```bash
+ npx chromatic --project-token=<my-token> --build-script-name=<your-tools-buildscript>
+```
+
+
+<!-- Here is demo of ours and you will see with your components -->
+<img src={Demo1} alt='chromatic demo'/>
+
+
+
+### How chromatic create better developer experience?
+
+Just like a git repo. You can maintain your design system across teams with branches,pull requests, share across teams to make developer workflow better and fluent.
+It supports
+
+- UI verification across teams
+- Merging between branches
+- PR checks 
+
+For futher more  [UI views] (https://www.chromatic.com/docs/review)
+
+
+<img  src='https://www.chromatic.com/docs/img/prscreen-activity.png' alt='Team procedure' />

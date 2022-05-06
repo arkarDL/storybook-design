@@ -1,0 +1,41 @@
+import { Meta, } from '@storybook/addon-docs';
+import Demo1 from '../assets/images/accessibility-test.png'
+
+<Meta title="Documentation/Testing/Accessibility" />
+
+## Accessibility Testing on Stories
+
+For developing better web applications storybook support accessibility tests for building [semantic web](https://www.w3.org/standards/semanticweb/).
+
+
+## Setting up for the test
+
+```bash
+# With npm
+npm install @storybook/addon-a11y --save-dev
+
+# With yarn
+yarn add --dev @storybook/addon-a11y
+
+```
+
+Include the addons in main.js configuration
+
+```javascript
+
+// .storybook/main.js
+
+module.exports = {
+  stories:[],
+  addons:[
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/preset-create-react-app',
+    '@storybook/addon-a11y', //👈 The a11y addon goes here
+};
+
+```
+
+Once you start you applicaton you can see accessibility test in the control section.
+
+<img src={Demo1} alt='accessibility test'/>
