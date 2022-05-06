@@ -1,0 +1,98 @@
+import { Meta, } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Guide/Createing Stories" />
+
+
+## Creating Stories
+
+Create a folder called src in your main folder and this is gonna be main component collection folder.
+
+Then, create a React component and start using in your story.
+
+
+Here is sample button component 
+
+### In React (JS)
+
+```typescript
+//  Button.stories.tsx
+
+import React from 'react';
+
+import { Button } from './Button';
+
+export default {
+  /* 👇 The title prop is optional.
+  * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
+  * to learn how to generate automatic titles
+  */
+  title: 'Button',
+  component: Button,
+};
+export const Primary = () => <Button name='Button' label="Button" />;
+export const Secondary = () => <Button name='😄👍😍💯' label="😄👍😍💯" />;
+export const Tertiary = () => <Button name='📚📕📈🤓' label="📚📕📈🤓" />;
+```
+
+### In React (TS)
+
+```typescript
+
+// Button.stories.ts|tsx
+
+import React from 'react';
+
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+import { Button } from './Button';
+
+export default {
+  /* 👇 The title prop is optional.
+  * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
+  * to learn how to generate automatic titles
+  */
+  title: 'Button',
+  component: Button,
+} as ComponentMeta<typeof Button>;
+
+export const Primary: ComponentStory<typeof Button> = () => (
+  <Button name="Button" label="Button" />
+);
+
+export const Secondary: ComponentStory<typeof Button> = () => (
+  <Button name="😄👍😍💯" label="😄👍😍💯" />
+);
+
+export const Tertiary: ComponentStory<typeof Button> = () => (
+  <Button name="📚📕📈🤓" label="📚📕📈🤓" />
+);
+
+```
+
+### In MDX
+
+```markdown
+<!-- Button.stories.mdx -->
+
+import { Meta, Story } from '@storybook/addon-docs';
+
+import { Button } from './Button';
+
+<Meta title="Button" component={Button}/>
+
+<Story name="Primary">
+  <Button name="Button" label="Button" />
+</Story>
+
+<Story name="Secondary">
+  <Button name="😄👍😍💯" label="😄👍😍💯" />
+</Story>
+
+<Story name="Tertiary">
+  <Button name="📚📕📈🤓" label="📚📕📈🤓" />
+</Story>
+
+```
+
+
+The default export metadata controls how Storybook lists your stories and provides information used by addons.

@@ -1,0 +1,166 @@
+import { Meta, } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Guide/Setup" />
+
+
+## Setting Up for component library implementation
+### Getting Started
+
+Open Terminal and navigate to your project directory and run
+
+```shell
+npm init -y
+```
+The -y flag when passed to the NPM command tells the generator to use the defaults
+
+React & ReactDOM as a dev dependencies 
+
+```shell
+ yarn i -D react react-dom
+```
+
+Then, let's add react and react-dom as peer dependencies in our package.json file.
+A peer dependency is a special type of dependency that would only ever come up if you were publishing your own package. 
+
+```javascript
+
+{
+    /** 
+    * OTHER OPTIONS
+    */
+    "devDependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    },
+    "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+    }
+    /** 
+    * OTHER OPTIONS
+    */
+}
+
+```
+
+### Installing typescript
+
+install typescript and @types/react 
+
+```bash
+yarn i -D typescript @types/react
+
+```
+generate a tsconfig.json file 
+
+```javascript
+
+npx tsc --init 
+/** 
+* tsc --init if you installed globally
+*/
+```
+
+change the following configs 
+
+```javascript
+...
+"compilerOptions" : {
+    ...
+    "jsx": "react",
+    ...
+    "module": "es6",
+    ...
+    "moduleResolution": "node",
+    ....
+    "outDir": "./dist",
+    ....
+  }
+....
+
+```
+
+### Installing storybook
+
+```bash
+npx sb init
+```
+
+Check in the script you can see the commands already.
+
+#### Folder Structure
+
+```
+.
+├── .storybook 
+|   └── main.js             # Addons and story configs
+|   └── preview.js          # Config controls  
+└──  stories 
+
+```
+
+### Adding tailwindCSS
+
+Install tailwindcss and its peer dependencies via npm, and create your tailwind.config.js.
+
+```bash
+yarn add -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+```
+
+Add tailwindcss and autoprefixer to your postcss.config.js file
+
+```javascript
+module.exports = {
+  plugins: {
+    tailwindcss: {},  
+    autoprefixer: {},
+  }
+}
+```
+Configure tailwindCSS jit component
+
+```javascript
+module.exports = {
+ content: ["./src/**/*.{tsx,jsx,mdx,ts}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Create global css file
+
+```
+.
+├──  ...
+├── style 
+|   └── global.css             # global css
+└──  ... 
+
+```
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Integrating tailwindCSS to Storybook
+
+Just import the global css file in your storybook preview.js file
+
+```javascript
+import '@/styles/global.css'; // <--- add this line
+
+export const parameters = {
+//  ... configs here
+}
+```
+
+Now you can start building your components in isolation with the command,
+
+```bash
+yarn storybook
+```

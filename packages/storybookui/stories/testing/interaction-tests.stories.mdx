@@ -1,0 +1,42 @@
+import { Meta,Story ,Canvas} from '@storybook/addon-docs';
+import Demo1 from '../assets/images/interaction-test.png'
+
+<Meta title="Documentation/Testing/Interaction" />
+
+## Accessibility Testing on Stories
+
+For developing better web applications storybook support accessibility tests for building [semantic web](https://www.w3.org/standards/semanticweb/).
+
+You can checkout the demo in /Demo/Testing/Visual
+
+```typescript
+
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
+import InputForm from './login';
+
+export default {
+  title: 'Demo/Testing/Visual',
+  component: InputForm,
+} as ComponentMeta<typeof InputForm>;
+
+const Template: ComponentStory<any> = (args) => <InputForm {...args} />;
+
+export const FilledForm = Template.bind({});
+
+FilledForm.play = async ({ canvasElement }) => {
+
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await userEvent.type(canvas.getByTestId('email'), 'email@provider.com', {
+    delay: 100,
+  });
+  await userEvent.type(canvas.getByTestId('password'), 'change@email.com', {
+    delay: 100,
+  });
+  await userEvent.click(canvas.getByRole('button'));
+};
+
+```
+
+<img src={Demo1} alt='Interaction test result'/>
