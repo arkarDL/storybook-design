@@ -1,0 +1,117 @@
+import { Meta, } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Guide/Production" />
+
+
+## Bundling and minifacation for production.
+
+> first of all make sure you import  your global css files to the main entry index.js 
+
+
+```
+.
+├── .storybook 
+└──  index.ts   <-- here 
+
+```
+
+```typescript
+import './styles/global.css' <-- this line
+export * from './src';
+
+```
+
+Install rollup packages 
+
+```bash
+yarn add -D rollup @rollup/plugin-babel rollup-plugin-postcss rollup-plugin-peer-deps-external rollup-plugin-terser @babel/preset-react @rollup/plugin-node-resolve @rollup/plugin-typescript 
+```
+- *rollup* for CLI to the library
+- *@rollup/plugin-babel* integration with babel
+- *rollup-plugin-postcss* postcss for processing tailwind 
+- *rollup-plugin-peer-deps-external* remove peer dependencies, reducing the bundle size
+- *rollup-plugin-terser* minify generated es bundle
+- *@babel/preset-react* add JSX
+- *@rollup/plugin-node-resolve* bundling third party dependencies
+- *@rollup/plugin-typescript* typescript transpiler
+- *rollup-plugin-dts* for generating d.ts files
+
+
+```typescript
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
+import dts from "rollup-plugin-dts";
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import postcss from "rollup-plugin-postcss";
+import { terser } from "rollup-plugin-terser";
+
+const packageJson = require("./package.json");
+export default [
+    {
+        input: "./index.ts",                <-- main entry file under .
+        output: [
+            {
+                file: packageJson.main,
+                format: "cjs",
+                sourcemap: true,
+            },
+            {
+                file: packageJson.module,
+                format: "esm",
+                sourcemap: true,
+            },
+        ],
+        plugins: [
+            peerDepsExternal(),
+            resolve(),
+            commonjs(),
+            typescript({ tsconfig: "./tsconfig.json" }),
+            postcss(),
+            terser(),                       <--  compress the bundle
+        ],
+    },
+    {
+        input: "./index.ts",                 <-- main entry under . for types
+        output: [{ file: "dist/index.d.ts", format: "esm" }],
+        plugins: [dts()],
+        external: [/\.css$/],
+    },
+];
+```
+
+Building script in packageJson
+
+```json
+// ...
+ "main": "dist/index.js",        <-- dist entry
+ "module": "dist/index.es.js",   <-- dist type entry
+// ...
+"scripts": {
+    // ...
+    "build": "rollup -c", 
+    // ...
+  }
+// ...
+
+```
+
+### Final 
+
+After running the build script, roll up will generate the production bundle in 
+
+
+```
+.
+├── ... 
+├── dist 
+|   └── cjs            
+|   └── esm    
+|   └── index.d.ts         
+└──  ... 
+
+```
+
+Deployment OPTIONS
+- [Github Package Registry](https://github.com/features/packages).
+- [Npm Registry](https://www.npmjs.com/)

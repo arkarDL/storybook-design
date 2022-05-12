@@ -1,0 +1,22 @@
+<!-- Input.stories.mdx -->
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { within, userEvent } from '@storybook/testing-library';
+import Input from './Input';
+
+<Meta title="Components/Input" component={Input}/>
+
+export const Template = (args) => <Input {...args} />;
+
+# Input Box 
+
+With `MDX`, we can define a story for `Input` right in the middle of our
+Markdown documentation.
+
+
+<Story name="Primary" label="Primary"  args={{ label: 'Primary',variant:"primary" }} >
+  {Template.bind({})}
+</Story>
+
+
+
